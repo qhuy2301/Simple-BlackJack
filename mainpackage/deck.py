@@ -23,9 +23,9 @@ class Deck:
     Methods
     -------
         shuffle():
-            shuffle the deck
+            Shuffle the deck
         deal():
-            deal (return) a card from the deck
+            Deal (return) a card from the deck
     """
 
     def __init__(self):

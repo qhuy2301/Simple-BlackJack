@@ -1,9 +1,8 @@
 class Card:
     """
-    A class to represent a card
+    A class to represent cards
 
     ...
-
 
     Attribute
     ---------
@@ -13,7 +12,7 @@ class Card:
         the rank of the card
     """
 
-    def __init__(self,suit,rank):
+    def __init__(self, suit, rank):
         """
         Constructor of the object
 
@@ -33,4 +32,4 @@ class Card:
         Print out the suit and rank of the card
         """
 
-        return "{} of {}".format(suit.capitalize(), rank.capitalize())
+        return "{} of {}".format(self.suit.capitalize(), self.rank.capitalize())
