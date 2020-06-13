@@ -45,10 +45,9 @@ class Hand:
         """
 
         self.cards.append(card)
-        self.value += values(card.rank)
+        self.value += values[card.rank]
         if card.rank == "Ace":
             self.aces += 1
-
 
     def adjust_for_ace(self):
         """

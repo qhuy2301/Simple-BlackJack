@@ -1,5 +1,6 @@
 import random
-from card import Card
+from mainpackage.card import Card
+
 
 suits = ("Hearts", "Diamonds", "Spades", "Clubs")
 ranks = ("Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
@@ -41,19 +42,23 @@ class Deck:
         self.deck = []
         for suit in suits:
             for rank in ranks:
-                card = Card(suit=suit, rank=rank)
-                self.deck.append(card)
+                self.deck.append(Card(suit, rank))
+
+    def __str__(self):
+        deck_comp = ''  # start with an empty string
+        for card in self.deck:
+            deck_comp += '\n '+card.__str__()
+        return 'The deck has:' + deck_comp
 
     def shuffle(self):
         """
         Shuffle the deck
         """
-
         random.shuffle(self.deck)
 
     def deal(self):
         """
         Deal a card from the deck
         """
-
-        return self.deck.pop()
+        card = self.deck.pop()
+        return card

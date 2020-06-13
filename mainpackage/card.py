@@ -32,4 +32,4 @@ class Card:
         Print out the suit and rank of the card
         """
 
-        return "{} of {}".format(self.suit.capitalize(), self.rank.capitalize())
+        return self.rank + " of " + self.suit
