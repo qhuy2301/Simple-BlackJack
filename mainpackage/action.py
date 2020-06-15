@@ -1,4 +1,4 @@
-from chip import Chips
+from chips import Chips
 from deck import Deck
 from hand import Hand
 
@@ -22,14 +22,14 @@ def hit(deck, hand):
 
 
 def hit_or_stand(deck, hand):
-    global playing
+    global game_on
     while True:
         decision = input("Would you like to hit or stand? Enter 'h' for hit or 's' for stand.")
         if (decision == 'h'):
             hit(deck, hand)
-            break
         elif (decision == 's'):
             print("Player stands. Dealer is playing.")
+            game_on = False
             break
         else:
             print("Invalid input. Please try again.")

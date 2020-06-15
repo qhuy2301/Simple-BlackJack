@@ -1,64 +1,71 @@
+"""Docstring for the deck.py module
+
+This module contains the Deck class which can be used for creating a
+normal deck of cards.
+
+Attributes
+----------
+SUITS : tuple(str)
+    A tuple that contains all four suits of a deck of cards
+RANKS : tuple(str)
+    A tuple that contains all thirteen ranks of a deck of cards
+VALUES : dict(str:int)
+    A dictionary that maps the ranks to their integer values
+
+"""
 import random
-from mainpackage.card import Card
+from .card import Card
 
 
-suits = ("Hearts", "Diamonds", "Spades", "Clubs")
-ranks = ("Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
+SUITS = ("Hearts", "Diamonds", "Spades", "Clubs")
+RANKS = ("Two", "Three", "Four", "Five", "Six", "Seven", "Eight",
          "Nine", "Ten", "Jack", "Queen", "King", "Ace")
-values = {"Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6,
+VALUES = {"Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6,
           "Seven": 7, "Eight": 8, "Nine": 9, "Ten": 10, "Jack": 10,
           "Queen": 10, "King": 10, "Ace": 11}
 
 
 class Deck:
     """
-    A class to represent a deck
-
-    ...
+    A class to represent a deck of cards
 
     Attributes
-    ---------
-        deck: [card]
-            a list of all cards available to deal
+    ----------
+        deck : list(Card)
+            A list of all cards available to deal
 
     Methods
     -------
-        shuffle():
+        shuffle
             Shuffle the deck
-        deal():
-            Deal (return) a card from the deck
+        deal
+            Get a card from the deck
+
     """
 
     def __init__(self):
-        """
-        Constructor of the object
-
-        Parameters
-        ----------
-            deck: [card]
-                a list of all cards available to deal
-        """
-
+        """Class constructor"""
         self.deck = []
-        for suit in suits:
-            for rank in ranks:
+        for suit in SUITS:
+            for rank in RANKS:
                 self.deck.append(Card(suit, rank))
 
-    def __str__(self):
-        deck_comp = ''  # start with an empty string
-        for card in self.deck:
-            deck_comp += '\n '+card.__str__()
-        return 'The deck has:' + deck_comp
-
     def shuffle(self):
-        """
-        Shuffle the deck
-        """
+        """Shuffle the deck."""
         random.shuffle(self.deck)
 
     def deal(self):
         """
-        Deal a card from the deck
+        Get a card from the deck.
+
+        Remove a random card from the deck and give it to the one who
+        draws.
+
+        Returns
+        -------
+        card : :obj: Card
+            A card from the deck.
+
         """
         card = self.deck.pop()
         return card
