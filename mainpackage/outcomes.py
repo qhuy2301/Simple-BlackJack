@@ -1,22 +1,27 @@
-def player_win(player, dealer, chips):
+def player_win(player):
     print("Player wins!")
-    chips.win_bet()
+    player.total_chips += player.bet
 
 
-def player_bust(player, dealer, chips):
+def player_bust(player):
     print("Player busts!")
-    chips.lose_bet()
+    player.total_chips -= player.bet
 
 
-def dealer_win(player, dealer, chips):
+def dealer_win(player):
     print("Dealer wins!")
-    chips.lose_bet()
+    player.total_chips -= player.bet
 
 
-def dealer_bust(player, dealer, chips):
+def dealer_bust(player):
     print("Dealer busts!")
-    chips.win_bet()
+    player.total_chips += player.bet
 
 
-def push(player, dealer, chips):
+def push(player):
     print("It's a tie!")
+
+
+def blackjack(player):
+    print("Black Jack!!!")
+    player.total_chips += player.bet * 3/2

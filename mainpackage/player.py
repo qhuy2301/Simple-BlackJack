@@ -4,7 +4,7 @@ This module contains the Player class which can be used for creating
 multiple Black Jack players.
 
 """
-from .deck import VALUES
+from deck import VALUES
 
 
 class Player:
@@ -35,14 +35,16 @@ class Player:
 
     Methods
     -------
-    add_card(Card)
+    hit(Deck)
         Add a card from the deck to the player's hand
     adjust
         Adjust the value of aces to keep the total value under 21
+    show_all_cards
+        Show all cards in the player's hand
 
     """
 
-    def __init__(self, name, total_chips):
+    def __init__(self, name, total_chips=0):
         """
         Class constructor
 
@@ -50,7 +52,7 @@ class Player:
         ----------
         name : str
             Player's name
-        total_chips : int
+        total_chips : int, optional
             Total amount of chips the player has
 
         """
@@ -61,7 +63,19 @@ class Player:
         self.value = 0
         self.aces = 0
 
-    def add_card(self, card):
+    def betting(self):
+        while True:
+            try:
+                self.bet = int(input("Enter the amount you want to bet: "))
+            except ValueError:
+                print("Invalid input.")
+            else:
+                if (self.bet > self.total_chips):
+                    print("Insufficient.")
+                else:
+                    break
+
+    def hit(self, deck):
         """
         Add a card from the deck to the player's hand.
 
@@ -72,10 +86,11 @@ class Player:
 
         Parameters
         ----------
-        card : :obj: Card
-            The card to be added to the player's hand
+        deck : :obj: Deck
+            The deck from which a card will be drawn
 
         """
+        card = deck.deal()
         self.hand.append(card)
         self.value += VALUES[card.rank]
         if card.rank == "Ace":
@@ -83,7 +98,7 @@ class Player:
 
     def adjust(self):
         """
-        Adjust the value of Ace cards
+        Adjust the value of Ace cards.
 
         If the player's total hand value exceeds 21 and there is at
         least one Ace card, its value can be adjust from 11 to 1.
@@ -92,3 +107,11 @@ class Player:
         while (self.value > 21) and (self.aces > 0):
             self.value -= 10
             self.aces -= 1
+
+    def show_all_cards(self):
+        """Show all cards in the player's hand."""
+        print(f"\n{self.name}'s hand:", *self.hand, sep="\n ")
+
+    def show_value(self):
+        """Show the player's hand value."""
+        print(f"{self.name}'s hand value: {self.value}")

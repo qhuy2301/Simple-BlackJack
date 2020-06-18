@@ -14,7 +14,7 @@ VALUES : dict(str:int)
 
 """
 import random
-from .card import Card
+from card import Card
 
 
 SUITS = ("Hearts", "Diamonds", "Spades", "Clubs")

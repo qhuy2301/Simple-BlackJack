@@ -1,52 +1,53 @@
 from deck import Deck
-from hand import Hand
-from chips import Chips
-import action as action
+from player import Player
+from dealer import Dealer
 import outcomes as outcomes
 
 
 def blackjack():
+    print("Welcome to Black Jack!!!")
     while True:
-        print("Welcome to Black Jack")
-
         deck = Deck()
         deck.shuffle()
 
-        player = Hand()
-        player.add_card(deck.deal())
-        player.add_card(deck.deal())
-        player_chips = Chips()
+        num_play = int(input("How many people are playing? "))
+        player_list = []
 
-        dealer = Hand()
-        dealer.add_card(deck.deal())
-        dealer.add_card(deck.deal())
+        for i in range(num_play):
+            print("\nPlayer {num} information".format(num=i+1))
+            name = input("Name: ")
+            chips = int(input("Total chips: "))
+            player = Player(name, chips)
+            player.betting()
+            player.hit(deck)
+            player.hit(deck)
+            player_list.append(player)
 
-        action.bet(player_chips)
+        dealer = Dealer("Dealer")
+        dealer.hit(deck)
+        dealer.hit(deck)
 
-        action.show_some_cards(player, dealer)
+        dealer.show_one_card()
+        for player in player_list:
+            player.show_all_cards()
+            player.show_value()
 
-        global game_on
-        while game_on:
-            action.hit_or_stand(deck, player)
-
-            action.show_some_cards(player, dealer)
-
-            if player.value > 21:
-                outcomes.player_bust(player, dealer, player_chips)
-                break
+        for player in player_list:
+            dealer.ask(player, deck)
 
         while dealer.value < 17:
-            action.hit(deck, dealer)
-            action.show_all_cards(player, dealer)
+            dealer.hit(deck)
+            dealer.show_all_cards()
+            dealer.show_value()
 
         if dealer.value > 21:
-            outcomes.dealer_bust(player, dealer, player_chips)
+            outcomes.dealer_bust(player)
         elif dealer.value == player.value:
-            outcomes.push(player, dealer, player_chips)
+            outcomes.push(player)
         elif player.value < dealer.value:
-            outcomes.dealer_win(player, dealer, player_chips)
+            outcomes.dealer_win(player)
         else:
-            outcomes.dealer_win(player, dealer, player_chips)
+            outcomes.dealer_win(player)
 
         new_game = input("Replay?")
 
