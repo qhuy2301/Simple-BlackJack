@@ -9,7 +9,7 @@ def blackjack():
     while True:
         deck = Deck()
         deck.shuffle()
-
+        
         num_play = int(input("How many people are playing? "))
         player_list = []
 
