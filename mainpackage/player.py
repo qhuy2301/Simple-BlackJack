@@ -71,7 +71,7 @@ class Player:
                 print("Invalid input.")
             else:
                 if (self.bet > self.total_chips):
-                    print("Insufficient.")
+                    print("Sorry. You don't have enough chips.")
                 else:
                     break
 
